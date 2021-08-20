@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-  @Query("SELECT s FROM Student s WHERE s.email = ?1")
+  @Query(value = "SELECT * FROM student WHERE email = ?1", nativeQuery = true)
   Optional<Student> findStudentByEmail(String email);
 
-  @Query("SELECT s FROM Student s WHERE s.firstName = ?1 AND s.age >= ?2")
+  @Query(value = "SELECT * FROM Student WHERE first_name = ?1 AND age >= ?2", nativeQuery = true)
   List<Student> findStudentsByFirstNameEqualsAndAgeGreaterThanEqual(String firstName, Integer age);
 
 }
