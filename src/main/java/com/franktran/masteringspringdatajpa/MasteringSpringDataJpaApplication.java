@@ -17,14 +17,22 @@ public class MasteringSpringDataJpaApplication {
   }
 
   @Bean
-  public CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
+  public CommandLineRunner commandLineRunner(
+      StudentRepository studentRepository,
+      StudentIdCardRepository studentIdCardRepository
+  ) {
     return args -> {
-      generateRandomStudents(studentRepository);
-      PageRequest pageRequest = PageRequest.of(0, 5, Sort.by("firstName").descending());
-      Page<Student> page = studentRepository.findAll(pageRequest);
-      page
-          .getContent()
-          .forEach(System.out::println);
+      Faker faker = new Faker();
+      String firstName = faker.name().firstName();
+      String lastName = faker.name().lastName();
+      Student student = new Student(
+          firstName,
+          lastName,
+          String.format("%s@gmail.com", firstName.toLowerCase()),
+          faker.number().numberBetween(18, 40));
+      StudentIdCard studentIdCard = new StudentIdCard("1234567890", student);
+
+      studentIdCardRepository.save(studentIdCard);
     };
   }
 
