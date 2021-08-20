@@ -22,13 +22,8 @@ public class MasteringSpringDataJpaApplication {
 
       studentRepository.saveAll(Arrays.asList(frank, henry));
 
-      studentRepository
-          .findStudentByEmail(frank.getEmail())
-          .ifPresent(System.out::println);
-
-      studentRepository
-          .findStudentsByFirstNameEqualsAndAgeGreaterThanEqual("Frank", 21)
-          .forEach(System.out::println);
+      System.out.println("Deleting henry");
+      System.out.println(studentRepository.deleteStudentById(2L));
     };
   }
 
