@@ -25,6 +25,14 @@ public class MasteringSpringDataJpaApplication {
       studentRepository
           .findStudentByEmail(frank.getEmail())
           .ifPresent(System.out::println);
+
+      studentRepository
+          .findStudentsByFirstNameEqualsAndAgeEquals("Frank", 21)
+          .forEach(System.out::println);
+
+      studentRepository
+          .findStudentsByLastNameStartsWithAndAgeGreaterThanEqual("Tr", 30)
+          .forEach(System.out::println);
     };
   }
 
