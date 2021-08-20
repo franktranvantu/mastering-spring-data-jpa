@@ -24,8 +24,9 @@ public class MasteringSpringDataJpaApplication {
       studentRepository.saveAll(Arrays.asList(frank, henry));
 
       System.out.print("Number of students: ");
-      studentRepository.count();
+      System.out.println(studentRepository.count());
 
+      System.out.println("Selecting frank");
       studentRepository.findById(1L).ifPresent(System.out::println);
 
       System.out.println("Select all students");
@@ -33,11 +34,11 @@ public class MasteringSpringDataJpaApplication {
           .findAll()
           .forEach(System.out::println);
 
-      System.out.println("Delete henry");
+      System.out.println("Deleting henry");
       studentRepository.deleteById(2L);
 
       System.out.print("Number of students:");
-      studentRepository.count();
+      System.out.println(studentRepository.count());
     };
   }
 
