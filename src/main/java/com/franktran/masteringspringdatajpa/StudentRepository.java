@@ -11,6 +11,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
   List<Student> findStudentsByFirstNameEqualsAndAgeEquals(String firstName, Integer age);
 
-  List<Student> findStudentsByLastNameStartsWithAndAgeGreaterThanEqual(String lastName, Integer age);
+  List<Student> findStudentsByLastNameContainsAndAgeAfter(String lastName, Integer age);
+
+  List<Student> findStudentsByFirstNameContainingIgnoreCase(String firstName);
 
 }
