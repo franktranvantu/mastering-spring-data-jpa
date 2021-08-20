@@ -1,11 +1,10 @@
 package com.franktran.masteringspringdatajpa;
 
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 public class MasteringSpringDataJpaApplication {
@@ -17,13 +16,18 @@ public class MasteringSpringDataJpaApplication {
   @Bean
   public CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
     return args -> {
-      Student frank = new Student("Frank", "Tran", "frank@gmail.com", 21);
-      Student henry = new Student("Henry", "Tran", "henry@gmail.com", 34);
+      Faker faker = new Faker();
+      for (int i = 0; i < 20; i++) {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        Student student = new Student(
+            firstName,
+            lastName,
+            String.format("%s@gmail.com", firstName.toLowerCase()),
+            faker.number().numberBetween(18, 40));
 
-      studentRepository.saveAll(Arrays.asList(frank, henry));
-
-      System.out.println("Deleting henry");
-      System.out.println(studentRepository.deleteStudentById(2L));
+        studentRepository.save(student);
+      }
     };
   }
 
