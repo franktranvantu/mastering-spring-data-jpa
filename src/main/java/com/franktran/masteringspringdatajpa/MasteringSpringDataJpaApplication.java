@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class MasteringSpringDataJpaApplication {
 
@@ -32,17 +34,11 @@ public class MasteringSpringDataJpaApplication {
           faker.number().numberBetween(18, 40));
       StudentIdCard studentIdCard = new StudentIdCard("1234567890", student);
 
+      student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(5)));
+      student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(4)));
+      student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(3)));
+
       studentIdCardRepository.save(studentIdCard);
-
-      studentRepository
-          .findById(1L)
-          .ifPresent(System.out::println);
-
-      studentIdCardRepository
-          .findById(1L)
-          .ifPresent(System.out::println);
-
-      studentRepository.deleteById(1L);
     };
   }
 
