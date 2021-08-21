@@ -37,6 +37,21 @@ public class MasteringSpringDataJpaApplication {
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(3)));
       student.setStudentIdCard(studentIdCard);
 
+      student.addEnrolment(
+          new Enrolment(
+              new EnrolmentId(student.getId(), 1L),
+              new Course("Mastering Spring Data JPA", "IT"),
+              student
+          )
+      );
+      student.addEnrolment(
+          new Enrolment(
+              new EnrolmentId(student.getId(), 2L),
+              new Course("Mastering Spring Boot", "IT"),
+              student
+          )
+      );
+
       studentRepository.save(student);
 
       studentRepository

@@ -16,13 +16,19 @@ public class Enrolment {
 
   @ManyToOne
   @MapsId("studentId")
-  @JoinColumn(name = "student_id", foreignKey = @ForeignKey(name = "enrolment_course_id_fk"))
+  @JoinColumn(name = "student_id", foreignKey = @ForeignKey(name = "enrolment_student_id_fk"))
   private Student student;
 
   public Enrolment() {
   }
 
   public Enrolment(Course course, Student student) {
+    this.course = course;
+    this.student = student;
+  }
+
+  public Enrolment(EnrolmentId id, Course course, Student student) {
+    this.id = id;
     this.course = course;
     this.student = student;
   }
