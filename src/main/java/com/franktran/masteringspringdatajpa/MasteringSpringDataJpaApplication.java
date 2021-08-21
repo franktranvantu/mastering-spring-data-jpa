@@ -33,6 +33,10 @@ public class MasteringSpringDataJpaApplication {
       StudentIdCard studentIdCard = new StudentIdCard("1234567890", student);
 
       studentIdCardRepository.save(studentIdCard);
+
+      studentIdCardRepository
+          .findById(1L)
+          .ifPresent(System.out::println);
     };
   }
 
