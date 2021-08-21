@@ -110,16 +110,12 @@ public class Student {
     this.age = age;
   }
 
-  @Override
-  public String toString() {
-    return "Student{" +
-        "id=" + id +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", email='" + email + '\'' +
-        ", age=" + age +
-        ", studentIdCard=" + studentIdCard +
-        '}';
+  public StudentIdCard getStudentIdCard() {
+    return studentIdCard;
+  }
+
+  public void setStudentIdCard(StudentIdCard studentIdCard) {
+    this.studentIdCard = studentIdCard;
   }
 
 }
