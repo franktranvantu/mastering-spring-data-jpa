@@ -67,7 +67,7 @@ public class Student {
   @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE}, fetch = LAZY)
   private List<Book> books = new ArrayList<>();
 
-  @ManyToMany(mappedBy = "students")
+  @ManyToMany(mappedBy = "students", cascade = {PERSIST, REMOVE})
   private List<Course> courses = new ArrayList<>();
 
   public Student() {
