@@ -61,7 +61,7 @@ public class Student {
   )
   private Integer age;
 
-  @OneToOne(mappedBy = "student", orphanRemoval = true)
+  @OneToOne(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE})
   private StudentIdCard studentIdCard;
 
   @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE}, fetch = LAZY)

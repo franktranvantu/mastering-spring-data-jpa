@@ -37,8 +37,9 @@ public class MasteringSpringDataJpaApplication {
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(5)));
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(4)));
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(3)));
+      student.setStudentIdCard(studentIdCard);
 
-      studentIdCardRepository.save(studentIdCard);
+      studentRepository.save(student);
 
       studentRepository
           .findById(1L)
