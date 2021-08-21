@@ -39,6 +39,16 @@ public class MasteringSpringDataJpaApplication {
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(3)));
 
       studentIdCardRepository.save(studentIdCard);
+
+      studentRepository
+          .findById(1L)
+          .ifPresent(s -> {
+            student.getBooks().forEach(
+                b -> System.out.println(
+                    String.format("%s borrowed %s", s.getFirstName(), b.getBookName())
+                )
+            );
+          });
     };
   }
 
