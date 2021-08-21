@@ -56,6 +56,9 @@ public class Student {
   )
   private Integer age;
 
+  @OneToOne(mappedBy = "student")
+  private StudentIdCard studentIdCard;
+
   public Student() {
 
   }
@@ -115,6 +118,7 @@ public class Student {
         ", lastName='" + lastName + '\'' +
         ", email='" + email + '\'' +
         ", age=" + age +
+        ", studentIdCard=" + studentIdCard +
         '}';
   }
 
