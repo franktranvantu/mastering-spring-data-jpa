@@ -2,7 +2,7 @@ package com.franktran.masteringspringdatajpa;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(
@@ -56,7 +56,7 @@ public class Student {
   )
   private Integer age;
 
-  @OneToOne(mappedBy = "student")
+  @OneToOne(mappedBy = "student", orphanRemoval = true)
   private StudentIdCard studentIdCard;
 
   public Student() {
@@ -110,16 +110,12 @@ public class Student {
     this.age = age;
   }
 
-  @Override
-  public String toString() {
-    return "Student{" +
-        "id=" + id +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", email='" + email + '\'' +
-        ", age=" + age +
-        ", studentIdCard=" + studentIdCard +
-        '}';
+  public StudentIdCard getStudentIdCard() {
+    return studentIdCard;
+  }
+
+  public void setStudentIdCard(StudentIdCard studentIdCard) {
+    this.studentIdCard = studentIdCard;
   }
 
 }
