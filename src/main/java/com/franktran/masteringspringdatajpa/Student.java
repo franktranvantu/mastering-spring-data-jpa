@@ -67,8 +67,8 @@ public class Student {
   @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE}, fetch = LAZY)
   private List<Book> books = new ArrayList<>();
 
-  @ManyToMany(mappedBy = "students", cascade = {PERSIST, REMOVE})
-  private List<Course> courses = new ArrayList<>();
+  @OneToMany(mappedBy = "student", cascade = {PERSIST, REMOVE})
+  private List<Enrolment> enrolments = new ArrayList<>();
 
   public Student() {
 
@@ -147,18 +147,18 @@ public class Student {
     }
   }
 
-  public List<Course> getCourses() {
-    return courses;
+  public List<Enrolment> getEnrolments() {
+    return enrolments;
   }
 
-  public void enrolCourse(Course course) {
-    this.courses.add(course);
-    course.getStudents().add(this);
+  public void addEnrolment(Enrolment enrolment) {
+    if (!this.enrolments.contains(enrolment)) {
+      this.enrolments.add(enrolment);
+    }
   }
 
-  public void unEnrolCourse(Course course) {
-    this.courses.remove(course);
-    course.getStudents().remove(this);
+  public void removeEnrolment(Enrolment enrolment) {
+    this.enrolments.remove(enrolment);
   }
 
 }

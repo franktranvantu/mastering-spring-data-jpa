@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
@@ -38,9 +36,6 @@ public class MasteringSpringDataJpaApplication {
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(4)));
       student.addBook(new Book(faker.book().title(), LocalDateTime.now().minusYears(3)));
       student.setStudentIdCard(studentIdCard);
-
-      student.enrolCourse(new Course("Mastering Spring Data JPA", "IT"));
-      student.enrolCourse(new Course("Mastering Spring Boot", "IT"));
 
       studentRepository.save(student);
 
