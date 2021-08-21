@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
@@ -63,7 +64,7 @@ public class Student {
   @OneToOne(mappedBy = "student", orphanRemoval = true)
   private StudentIdCard studentIdCard;
 
-  @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE})
+  @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE}, fetch = LAZY)
   private List<Book> books = new ArrayList<>();
 
   public Student() {
