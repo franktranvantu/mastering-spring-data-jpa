@@ -41,15 +41,15 @@ public class MasteringSpringDataJpaApplication {
           new Enrolment(
               new EnrolmentId(student.getId(), 1L),
               new Course("Mastering Spring Data JPA", "IT"),
-              student
-          )
+              student,
+              LocalDateTime.now().minusYears(5))
       );
       student.addEnrolment(
           new Enrolment(
               new EnrolmentId(student.getId(), 2L),
               new Course("Mastering Spring Boot", "IT"),
-              student
-          )
+              student,
+              LocalDateTime.now().minusYears(4))
       );
 
       studentRepository.save(student);
