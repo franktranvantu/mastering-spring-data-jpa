@@ -67,6 +67,20 @@ public class Student {
   @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {PERSIST, REMOVE}, fetch = LAZY)
   private List<Book> books = new ArrayList<>();
 
+  @ManyToMany
+  @JoinTable(
+      name = "enrolment",
+      joinColumns = @JoinColumn(
+          name = "student_id",
+          foreignKey = @ForeignKey(name = "enrolment_student_id_fk")
+      ),
+      inverseJoinColumns = @JoinColumn(
+          name = "course_id",
+          foreignKey = @ForeignKey(name = "enrolment_course_id_fk")
+      )
+  )
+  private List<Course> courses = new ArrayList<>();
+
   public Student() {
 
   }
@@ -142,6 +156,10 @@ public class Student {
       this.books.remove(book);
       book.setStudent(null);
     }
+  }
+
+  public List<Course> getCourses() {
+    return courses;
   }
 
 }
