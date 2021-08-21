@@ -2,6 +2,9 @@ package com.franktran.masteringspringdatajpa;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.*;
 
 @Entity
@@ -26,6 +29,20 @@ public class Course {
 
   @Column(name = "department", columnDefinition = "TEXT", nullable = false)
   private String department;
+
+  @ManyToMany
+  @JoinTable(
+      name = "enrolment",
+      joinColumns = @JoinColumn(
+          name = "course_id",
+          foreignKey = @ForeignKey(name = "enrolment_course_id_fk")
+      ),
+      inverseJoinColumns = @JoinColumn(
+          name = "student_id",
+          foreignKey = @ForeignKey(name = "enrolment_student_id_fk")
+      )
+  )
+  private List<Student> students = new ArrayList<>();
 
   public Course() {
   }
@@ -57,6 +74,10 @@ public class Course {
 
   public void setDepartment(String department) {
     this.department = department;
+  }
+
+  public List<Student> getStudents() {
+    return students;
   }
 
   @Override
