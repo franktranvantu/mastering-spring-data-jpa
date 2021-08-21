@@ -151,4 +151,14 @@ public class Student {
     return courses;
   }
 
+  public void enrolCourse(Course course) {
+    this.courses.add(course);
+    course.getStudents().add(this);
+  }
+
+  public void unEnrolCourse(Course course) {
+    this.courses.remove(course);
+    course.getStudents().remove(this);
+  }
+
 }
