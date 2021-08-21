@@ -30,19 +30,8 @@ public class Course {
   @Column(name = "department", columnDefinition = "TEXT", nullable = false)
   private String department;
 
-  @ManyToMany
-  @JoinTable(
-      name = "enrolment",
-      joinColumns = @JoinColumn(
-          name = "course_id",
-          foreignKey = @ForeignKey(name = "enrolment_course_id_fk")
-      ),
-      inverseJoinColumns = @JoinColumn(
-          name = "student_id",
-          foreignKey = @ForeignKey(name = "enrolment_student_id_fk")
-      )
-  )
-  private List<Student> students = new ArrayList<>();
+  @OneToMany(mappedBy = "course")
+  private List<Enrolment> enrolments = new ArrayList<>();
 
   public Course() {
   }
@@ -76,8 +65,18 @@ public class Course {
     this.department = department;
   }
 
-  public List<Student> getStudents() {
-    return students;
+  public List<Enrolment> getEnrolments() {
+    return enrolments;
+  }
+
+  public void addEnrolment(Enrolment enrolment) {
+    if (!this.enrolments.contains(enrolment)) {
+      this.enrolments.add(enrolment);
+    }
+  }
+
+  public void removeEnrolment(Enrolment enrolment) {
+    this.enrolments.remove(enrolment);
   }
 
   @Override
